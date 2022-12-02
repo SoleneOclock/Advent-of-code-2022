@@ -2507,14 +2507,10 @@ const scores = {
   'A': 1, // Rock
   'B': 2, // Paper
   'C': 3, // sissors
-  'X': 1, // Rock
-  'Y': 2, // Paper
-  'Z': 3, // Sissors
+  'X': 1, // LOSE
+  'Y': 2, // DRAW
+  'Z': 3, // WIN
 }
-
-// 1 bat 3
-// 3 bat 2
-// 2 bat 1
 
 function aWins(a, b) {
   switch(a) {
@@ -2532,20 +2528,32 @@ function aWins(a, b) {
   }
 }
 
+let toWin = []
+toWin[1] = 3 // 1 bat 3
+toWin[2] = 1 // 2 bat 1
+toWin[3] = 2 // 3 bat 2
+
+function scoreToWinAgainst(play) {
+  return Number(Object.keys(toWin).find(key => toWin[key] === play));
+}
+
+function scoreToLooseAgainst(play) {
+  return toWin[play]
+}
+
 const rounds = data.split("\n")
 const totalScores = rounds.map(round => {
   const roundScore = round.split(' ').map(play => scores[play])
-  if (roundScore[0] === roundScore[1]) {
-    return roundScore[1] + 3
+  console.log(roundScore)
+  if (roundScore[1] === 2) { //draw
+    return roundScore[0] + 3
   }
-  if (aWins(roundScore[1],roundScore[0])) {
-    return roundScore[1] + 6
+  if (roundScore[1] === 3) { //win
+    return scoreToWinAgainst(roundScore[0]) + 6
   }
-  else return roundScore[1]
+  if (roundScore[1] === 1) { //loose
+    return scoreToLooseAgainst(roundScore[0]) 
+  }
 })
 console.log(totalScores)
 console.log(totalScores.reduce((a,b) => a+b, 0));
-
-// bad : 10892
-// bad : 11609
-// bad : 11876
