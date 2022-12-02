@@ -2269,4 +2269,6 @@ const data = `9195
 3881
 2464`;
 
-console.log(Math.max(...(data.split("\n\n").map(lines => lines.split("\n").map(s => parseInt(s)).reduce((sum, one) => sum + one, 0)))));
+const elfs = data.split("\n\n").map(lines => lines.split("\n").map(s => parseInt(s)).reduce((sum, one) => sum + one, 0)).sort((a,b)=>b-a)
+
+console.log(elfs[0] + elfs[1] + elfs[2])
