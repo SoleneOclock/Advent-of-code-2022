@@ -306,6 +306,9 @@ wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
 ttgJtRGJQctTZtZT
 CrZsJsPPZsGzwwsLwLmpwMDw`
 
+
+// Etoile 1
+
 const rucksacks = data.split("\n").map(elfBags => [elfBags.slice(0, elfBags.length/2), elfBags.slice(elfBags.length/2)])
 
 const repetedItems = rucksacks.map(compartments => {
@@ -315,12 +318,35 @@ const repetedItems = rucksacks.map(compartments => {
     }
   }
 })
-
 var alphabet = "0abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
 const priorities = repetedItems.map(item => {
   return alphabet.indexOf(item)
 })
-
 const sumPriorities = priorities.reduce((a,b) => a+b)
 
-console.log(sumPriorities)
+
+// Etoile 2
+
+let groups = []
+let group = []
+data.split("\n").forEach((item, index) => {
+  group.push(item)
+  if (index % 3 === 2) {
+    groups.push(group)
+    group = []
+  }
+}, [])
+
+const groupCommun = groups.map(group => {
+  for (var i = 0; i < group[0].length; i++) {
+    if (group[1].includes(group[0][i]) && group[2].includes(group[0][i])) {
+      return group[0][i]
+    }
+  }
+})
+
+const groupPrio = groupCommun.map(item => {
+  return alphabet.indexOf(item)
+}).reduce((a,b) => a+b)
+
+console.log(groupPrio)
