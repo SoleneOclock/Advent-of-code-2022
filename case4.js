@@ -1006,6 +1006,8 @@ const dataTest = `2-4,6-8
 6-6,4-6
 2-6,4-8`
 
+// etoile 1
+
 const ranges = data.split("\n").map(pairs => pairs.split(',').map(sections => {
   const sectionsArr = sections.split('-')
   let range = ''
@@ -1014,7 +1016,6 @@ const ranges = data.split("\n").map(pairs => pairs.split(',').map(sections => {
   }
   return range
 })).map(pairs => {
-  console.log(pairs)
   if (pairs[0].includes(pairs[1])) {
     return true
   }
@@ -1024,7 +1025,27 @@ const ranges = data.split("\n").map(pairs => pairs.split(',').map(sections => {
   return false
 }).filter(isoverlapse => isoverlapse).length
 
-console.log(ranges)
+// etoile 2
+
+const rangesArray = data.split("\n").map(pairs => pairs.split(',').map(sections => {
+  const sectionsArr = sections.split('-')
+  let range = []
+  for (let i = Number(sectionsArr[0]); i <= Number(sectionsArr[1]); i++) {
+    range.push(i)
+  }
+  return range
+})).map(pairs => {
+  let isOverlapsed = false
+  pairs[0].forEach(section => {
+    if (pairs[1].includes(section)) {
+      isOverlapsed = true
+    }
+  })
+  return isOverlapsed
+}).filter(isoverlapse => isoverlapse).length
+
+console.log(rangesArray)
 
 // bad 593 : too high
 // bad 564 : encore too high
+// 550 !
