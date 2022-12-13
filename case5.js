@@ -58,10 +58,12 @@ instructions.forEach(instruction => {
   const pileStart = Number(instruction[1])-1
   const pileEnd = Number(instruction[2])-1
 
+  const stacksToMove = [];
   for (let i = 0; i < nbCratesToMove; i++) {
     const topCrate = transposedMatrice[pileStart].pop();
-    transposedMatrice[pileEnd].push(topCrate);
+    stacksToMove.unshift(topCrate);
   }
+  transposedMatrice[pileEnd].push(...stacksToMove);
 })
 
 console.log('Matrice at end ', transposedMatrice)
@@ -76,6 +78,8 @@ const topCrates = transposedMatrice.reduce(
 
 console.log(topCrates);
 
-// bad JTFZNFC
-// bad FCHPSPMG
-// bad FCHP SPMG
+// étoile 2
+
+
+
+
